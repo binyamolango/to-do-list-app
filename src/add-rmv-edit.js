@@ -1,70 +1,75 @@
-const todoList = document.getElementById('todo-list');
+const todoList = document.getElementById('tasks');
 const form = document.getElementById('form');
-const taskIn = document.getElementById('taskIn');
+const taskIn = document.getElementById('taskInput');
 
-const addTask = () => {
-  const lists = JSON.parse(localStorage.getItem('listItem')) || [];
-  if (lists === null) return;
-
-  const sortedList = lists.slice().sort((a, b) => a.index - b.index);
+const updateList = () => {
+  const tasks = JSON.parse(localStorage.getItem('listItems')) || [];
+  if (tasks === null) return;
+  const sortedList = tasks.slice().sort((a, b) => a.index - b.index);
   todoList.innerHTML = '';
   sortedList.forEach((task) => {
+    const { completed } = task;
+    const checked = completed ? 'active' : '';
+    const lineT = completed ? 'line' : '';
+    const unfinished = !completed ? 'active' : '';
     const list = `
         <div class="task task-${task.index}">
-            <input type="checkbox" data-btn="${task.index}">
-            <input type="text" class="list" value="${task.description}" data-desc="${task.index}">
-            <button class="move" data-remove="${task.index}"></button>
+          <div class="checkbox" data-btn="${task.index}">
+            <button class="square ${unfinished}"></button>
+            <button class="done ${checked}"></button>
+          </div>
+          <input type="text" class="list ${lineT}" value="${task.description}" data-desc="${task.index}"/>
+          <button class="move" data-remove="${task.index}"></button>
         </div>
-    `;
+      `;
     todoList.insertAdjacentHTML('beforeend', list);
   });
 };
 
-const editTask = (e) => {
-  const lists = JSON.parse(localStorage.getItem('listItem')) || [];
-  const clicked = e.target.closest('.move');
-  if (!clicked) return;
-  const listNum = +clicked.dataset.remove;
-  const filtered = lists.filter((list) => list.index !== listNum);
-  let filterOrder = [];
-  filtered.forEach((list, count) => {
-    list.index = count;
-    filterOrder = [...filterOrder, list];
-  });
-  localStorage.setItem('listItem', JSON.stringify(filterOrder));
-  addTask();
-};
-
-const removeTask = (e) => {
-  const lists = JSON.parse(localStorage.getItem('listItem')) || [];
-  const clicked = e.target.closest('.list');
-  if (!clicked) return;
-  clicked.addEventListener('keyup', () => {
-    const listNum = +clicked.dataset.desc;
-    const list = lists.find((list) => list.index === listNum);
-    list.description = clicked.value;
-    localStorage.setItem('listItem', JSON.stringify(lists));
-  });
-};
-
-const saveLocalStorage = () => {
-  const lists = JSON.parse(localStorage.getItem('listItem')) || [];
+const addTask = (e) => {
+  e.preventDefault();
+  const tasks = JSON.parse(localStorage.getItem('listItems')) || [];
   const tasksItem = taskIn.value;
   taskIn.value = '';
   if (tasksItem === null) return;
-  const list = {
+  const task = {
     description: tasksItem,
     completed: false,
-    index: lists.length,
+    index: tasks.length,
   };
-  const filtered = [...lists, list];
-  localStorage.setItem('listItem', JSON.stringify(filtered));
+  const filtered = [...tasks, task];
+  localStorage.setItem('listItems', JSON.stringify(filtered));
+  updateList();
 };
+form.addEventListener('submit', addTask);
 
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  saveLocalStorage();
-  addTask();
-});
-todoList.addEventListener('click', editTask);
+const removeTask = (e) => {
+  const clicked = e.target.closest('.move');
+  if (!clicked) return;
+  const tasks = JSON.parse(localStorage.getItem('listItems')) || [];
+  const listNum = +clicked.dataset.remove;
+  const filtered = tasks.filter((task) => task.index !== listNum);
+  let filterOrder = [];
+  filtered.forEach((task, count) => {
+    task.index = count;
+    filterOrder = [...filterOrder, task];
+  });
+  localStorage.setItem('listItems', JSON.stringify(filterOrder));
+  updateList();
+};
 todoList.addEventListener('click', removeTask);
+
+const editTask = (e) => {
+  const clicked = e.target.closest('.list');
+  if (!clicked) return;
+  clicked.addEventListener('keyup', () => {
+    const tasks = JSON.parse(localStorage.getItem('listItems')) || [];
+    const listNum = +clicked.dataset.desc;
+    const task = tasks.find((task) => task.index === listNum);
+    task.description = clicked.value.trim();
+    localStorage.setItem('listItems', JSON.stringify(tasks));
+  });
+};
+todoList.addEventListener('click', editTask);
+
+export default updateList;
