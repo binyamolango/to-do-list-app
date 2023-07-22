@@ -1,4 +1,4 @@
-# To-do List
+# To-do List web-app
 
 # 📗 Table of Contents
 
