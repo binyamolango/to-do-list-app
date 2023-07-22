@@ -1,0 +1,84 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+button {
+  background: transparent;
+  border: none;
+  height: 23px;
+  width: 23px;
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(1.1);
+}
+
+.container {
+  width: 61%;
+  margin: 6% auto;
+  border: 1px solid #e2dbdb;
+}
+
+.cont {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #e2dbdb;
+  padding: 23px;
+}
+
+.ent {
+  background: url('/src/assets/enter.png');
+  background-size: contain;
+  opacity: 0.5;
+}
+
+.task {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #e2dbdb;
+  padding-left: 23px;
+  position: relative;
+}
+
+.list {
+  padding: 23px;
+  font-size: 17px;
+}
+
+.cont input {
+  width: 90%;
+  padding: 8px;
+  font-size: 16px;
+  border: none;
+}
+
+.ref {
+  background: url('/src/assets/refresh.png');
+  background-size: contain;
+  opacity: 0.8;
+}
+
+.move {
+  background: url('/src/assets/move.png');
+  background-size: contain;
+  position: absolute;
+  top: 20px;
+  right: 23px;
+}
+
+.clear-cont {
+  padding: 24px;
+  display: flex;
+  justify-content: center;
+  background-color: #e9e3e3;
+}
+
+.clear {
+  color: #636363;
+  font-size: 20px;
+  font-weight: 700;
+  width: 100%;
+}
