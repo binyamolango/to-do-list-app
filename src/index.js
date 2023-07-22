@@ -1,39 +1,24 @@
 import './style.css';
+import './add-rmv-edit.js';
 
 const todoList = document.getElementById('todo-list');
-const lists = [
-  {
-    index: 1,
-    description: 'Wash clothes',
-    completed: true,
-  },
-  {
-    index: 2,
-    description: 'Cook dinner',
-    completed: false,
-  },
-  {
-    index: 3,
-    description: 'Coding challenge',
-    completed: false,
-  },
-  {
-    index: 4,
-    description: 'TAWG',
-    completed: true,
-  },
-];
+const lists = JSON.parse(localStorage.getItem('listItem')) || [];
 
-const listItemDisplay = () => {
-  lists.forEach((list) => {
-    todoList.innerHTML += `
-        <div class="task">
-            <input type="checkbox">
-            <div class="list">${list.description}</div>
-            <button class="move" type="button"></button>
-        <div>
-        `;
+const loadLocalStorage = () => {
+  if (lists === null) return;
+
+  const sortedList = lists.slice().sort((a, b) => a.index - b.index);
+  sortedList.forEach((task) => {
+    const list = `
+      <div class="task task-${task.index}">
+        <input type="checkbox" data-btn="${task.index}">
+        <input type="text" class="list" value="${task.description}" data-desc="${task.index}">
+        <button class="move" data-remove="${task.index}"></button>
+      </div>
+    `;
+
+    todoList.insertAdjacentHTML('beforeend', list);
   });
 };
 
-listItemDisplay();
+loadLocalStorage();
