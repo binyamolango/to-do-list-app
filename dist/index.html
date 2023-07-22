@@ -1,29 +1,28 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <title>to-do-list</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <script defer src="index.bundle.js"></script>
-    <script defer src="print.bundle.js"></script>
-  <script defer src="/runtime.bundle.js"></script><script defer src="/index.bundle.js"></script><script defer src="/print.bundle.js"></script></head>
-  <body>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>To-Do List</title>
+<script defer src="/runtime.bundle.js"></script><script defer src="/index.bundle.js"></script><script defer src="/print.bundle.js"></script></head>
+
+<body>
     <div class="container">
-      <div class="cont">
-        <h2>Today's To Do</h2>
-        <button class="ref" type="button"></button>
-      </div>
-
-      <form id="form" class="cont" action="">
-        <input id="taskIn" type="text" placeholder="Add to your list..." required>
-        <button class="ent" type="submit"></button>
-      </form>
-
-      <div id="todo-list"></div>
-      
-      <div class="cont clear-cont">
-          <button class="clear" type="button">Clear all completed</button>
-      </div>
+        <div class="cont">
+            <h2>Today's To Do</h2>
+            <button class="refresh" type="button"></button>
+        </div>
+        <form id="form" class="cont" action="">
+            <input id="taskInput" type="text" placeholder="Add to your list..." required>
+            <button class="enter" type="submit"></button>
+        </form>
+        <div id="tasks"></div>
+        <div class="cont clear-cont">
+            <button id="clear" class="clear" type="button">Clear all completed</button>
+        </div>
     </div>
-  </body>
+</body>
+
 </html>

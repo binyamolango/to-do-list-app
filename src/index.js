@@ -1,24 +1,14 @@
 import './style.css';
-import './add-rmv-edit.js';
+import displayList from './add-rmv-edit.js';
+import { bar, clear } from './clear-interaction.js';
 
-const todoList = document.getElementById('todo-list');
-const lists = JSON.parse(localStorage.getItem('listItem')) || [];
+const taskList = document.getElementById('tasks');
+taskList.addEventListener('click', bar);
 
-const loadLocalStorage = () => {
-  if (lists === null) return;
+const clearBtn = document.getElementById('clear');
+clearBtn.addEventListener('click', () => {
+  clear();
+  displayList();
+});
 
-  const sortedList = lists.slice().sort((a, b) => a.index - b.index);
-  sortedList.forEach((task) => {
-    const list = `
-      <div class="task task-${task.index}">
-        <input type="checkbox" data-btn="${task.index}">
-        <input type="text" class="list" value="${task.description}" data-desc="${task.index}">
-        <button class="move" data-remove="${task.index}"></button>
-      </div>
-    `;
-
-    todoList.insertAdjacentHTML('beforeend', list);
-  });
-};
-
-loadLocalStorage();
+displayList();
