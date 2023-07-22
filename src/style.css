@@ -46,6 +46,12 @@ button:active {
 .list {
   padding: 23px;
   font-size: 17px;
+  min-width: 85%;
+}
+
+input {
+  border: none;
+  outline: 0;
 }
 
 .cont input {
@@ -67,6 +73,11 @@ button:active {
   position: absolute;
   top: 20px;
   right: 23px;
+}
+
+.move:hover {
+  background: url('/src/assets/trash.png');
+  background-size: contain;
 }
 
 .clear-cont {
