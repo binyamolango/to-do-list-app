@@ -2,12 +2,12 @@ import './style.css';
 import './add-rmv-edit.js';
 
 const todoList = document.getElementById('todo-list');
+const lists = JSON.parse(localStorage.getItem('listItem')) || [];
 
 const loadLocalStorage = () => {
-  const tasks = JSON.parse(localStorage.getItem('listItem')) || [];
-  if (tasks === null) return;
+  if (lists === null) return;
 
-  const sortedList = tasks.slice().sort((a, b) => a.index - b.index);
+  const sortedList = lists.slice().sort((a, b) => a.index - b.index);
   sortedList.forEach((task) => {
     const list = `
       <div class="task task-${task.index}">
