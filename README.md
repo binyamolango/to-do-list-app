@@ -1,5 +1,4 @@
 # To-do List web-app
-
 # 📗 Table of Contents
 
 - [📖 About the Project](#about-project)
