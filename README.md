@@ -20,6 +20,7 @@
 - [⭐️ Show your support](#support)
 - [🙏 Acknowledgements](#acknowledgements)
 - [📝 License](#license)
+  
 <!-- PROJECT DESCRIPTION -->
 
 # 📖 To-do List <a name="about-project"></a>
