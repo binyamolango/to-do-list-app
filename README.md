@@ -89,7 +89,6 @@ git clone [https://github.com/binyamolango/todo-list.git](https://github.com/bin
 ### Install
 
 -Install Webpack:
-
 `npm install -D webpack webpack-cli`
 
 NOTE: If you are running on Windows, you need to initialize npm to create package.json file.
